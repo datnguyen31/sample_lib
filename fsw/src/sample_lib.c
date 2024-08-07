@@ -61,6 +61,13 @@ int32 SAMPLE_LibInit(void)
      * for this to ever fail when linked with a compliant C library.
      */
 
+    /* This string somehow got into OS_MutSemCreate (dev_mutex.c) */
+    if (strncpy(SAMPLE_Buffer, "SaMpLe", sizeof(SAMPLE_Buffer)) < 0)
+    {
+        return CFE_STATUS_EXTERNAL_RESOURCE_FAIL;
+    }
+    SAMPLE_Buffer[sizeof(SAMPLE_Buffer) - 1] = 0;
+
     SAMPLE_Function();
 
     OS_printf("SAMPLE Lib Initialized.%s\n", SAMPLE_LIB_VERSION_STRING);
