@@ -12,7 +12,7 @@ const char image_strs[] = {IMAGE_STR};
 
 int32 CameraCapture(DeviceId ID)
 {
-    CFE_PSP_MemCpy(cameraHandler[ID].image_str, image_strs, strlen(image_strs));
+    CFE_PSP_MemCpy(cameraHandler[ID].image_str, image_strs, 1 + strlen(image_strs));
 
     return 0;
 }
@@ -34,12 +34,10 @@ void foo()
     // This will cause no problem
     char str1[20];
     const char *testString = DEADBEEF;
-    memcpy(str1, testString, strlen(testString));
-    str1[strlen(DEADBEEF)] = '\0';
+    memcpy(str1, testString, 1 + strlen(testString));
 
     // But this will cause the "string shifting" issue.
     // The number this issue happens equal to the time I pass the string literal directly.
     char str2[20];
-    memcpy(str2, DEADBEEF, strlen(DEADBEEF));
-    str2[strlen(DEADBEEF)] = '\0';
+    memcpy(str2, DEADBEEF, 1 + strlen(DEADBEEF));
 }

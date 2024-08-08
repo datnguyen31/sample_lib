@@ -9,8 +9,7 @@ Camera_t cameraHandler[2]  = {{.Id = DEV_0}, {.Id = DEV_1}};
 void generateString(char array[20])
 {
     CFE_PSP_MemSet(array, 0, OS_MAX_API_NAME);
-    CFE_PSP_MemCpy(array, "image_1.png", strlen("image_1.png"));
-    array[strlen("image_1.png")] = '\0';
+    CFE_PSP_MemCpy(array, "image_1.png", 1 + strlen("image_1.png"));
 
     return;
 }

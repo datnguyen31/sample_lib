@@ -62,11 +62,10 @@ int32 SAMPLE_LibInit(void)
      */
 
     /* This string somehow got into OS_MutSemCreate (dev_mutex.c) */
-    if (strncpy(SAMPLE_Buffer, "SaMpLe", sizeof(SAMPLE_Buffer)) < 0)
+    if (strncpy(SAMPLE_Buffer, "SaMpLe", 1 + sizeof(SAMPLE_Buffer)))
     {
         return CFE_STATUS_EXTERNAL_RESOURCE_FAIL;
     }
-    SAMPLE_Buffer[sizeof(SAMPLE_Buffer) - 1] = 0;
 
     SAMPLE_Function();
 
